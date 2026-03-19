@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>心理的安全性チェック</title>
+<style>
+body { font-family: sans-serif; padding: 20px; max-width: 500px; margin: auto; }
+button { padding: 10px; margin-top: 10px; }
+</style>
+</head>
+
+<body>
+
+<h2>心理的安全性チェック</h2>
+<p>当てはまるものにチェック👇</p>
+
+<form id="form">
+<label><input type="checkbox"> ミスを共有できる</label><br>
+<label><input type="checkbox"> 上司に意見を言える</label><br>
+<label><input type="checkbox"> 違和感を言える</label><br>
+<label><input type="checkbox"> わからないと言える</label><br>
+<label><input type="checkbox"> 提案が歓迎される</label><br>
+<label><input type="checkbox"> 会議で発言がある</label><br>
+<label><input type="checkbox"> 沈黙が怖くない</label><br>
+<label><input type="checkbox"> 否定より質問が多い</label><br>
+
+<button type="button" onclick="calc()">診断する</button>
+</form>
+
+<h3 id="result"></h3>
+
+<script>
+function calc() {
+  let checked = document.querySelectorAll('input:checked').length;
+  let text = "";
+
+  if (checked >= 7) text = "心理的安全性が高い状態です！";
+  else if (checked >= 4) text = "中間ゾーン。改善の余地あり。";
+  else text = "要注意。安心して発言しにくい環境かも。";
+
+  document.getElementById("result").innerText = "スコア：" + checked + "/8\n" + text;
+}
+</script>
+
+</body>
+</html>
