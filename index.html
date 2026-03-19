@@ -1,46 +1,275 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<title>心理的安全性チェック</title>
-<style>
-body { font-family: sans-serif; padding: 20px; max-width: 500px; margin: auto; }
-button { padding: 10px; margin-top: 10px; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>心理的安全性チェック</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+        "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+      background: linear-gradient(180deg, #f5f7fb 0%, #eef2f9 100%);
+      color: #1f2937;
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 24px 16px 56px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 28px 20px 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #e8f0ff;
+      color: #2563eb;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: 32px;
+      line-height: 1.3;
+      margin: 0 0 12px;
+      color: #111827;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: #4b5563;
+      margin: 0 auto;
+      max-width: 560px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+      border: 1px solid #e5e7eb;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 0 8px;
+      color: #111827;
+    }
+
+    .section-desc {
+      font-size: 14px;
+      color: #6b7280;
+      margin: 0 0 20px;
+    }
+
+    .question-list {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .question-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      background: #fafbff;
+      transition: 0.2s ease;
+    }
+
+    .question-item:hover {
+      border-color: #c7d2fe;
+      background: #f7f9ff;
+    }
+
+    .question-item input {
+      margin-top: 3px;
+      width: 18px;
+      height: 18px;
+      accent-color: #2563eb;
+      flex-shrink: 0;
+    }
+
+    .question-item label {
+      cursor: pointer;
+      font-size: 15px;
+      color: #1f2937;
+      width: 100%;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 14px 20px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .primary-btn {
+      background: #2563eb;
+      color: #ffffff;
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.22);
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-1px);
+      opacity: 0.96;
+    }
+
+    .secondary-btn {
+      background: #eef2ff;
+      color: #374151;
+    }
+
+    .secondary-btn:hover {
+      background: #e5ebff;
+    }
+
+    .result-card {
+      margin-top: 20px;
+      display: none;
+      border-radius: 18px;
+      padding: 20px;
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+    }
+
+    .result-score {
+      font-size: 14px;
+      font-weight: 700;
+      color: #2563eb;
+      margin-bottom: 8px;
+    }
+
+    .result-title {
+      font-size: 24px;
+      font-weight: 800;
+      margin: 0 0 10px;
+      color: #111827;
+    }
+
+    .result-text {
+      margin: 0 0 14px;
+      color: #374151;
+      font-size: 15px;
+    }
+
+    .advice-box {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .advice-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #111827;
+      margin-bottom: 8px;
+    }
+
+    .advice-list {
+      margin: 0;
+      padding-left: 18px;
+      color: #4b5563;
+      font-size: 14px;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: #6b7280;
+      font-size: 13px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 26px;
+      }
+
+      .card {
+        padding: 18px;
+      }
+
+      .result-title {
+        font-size: 20px;
+      }
+
+      button {
+        width: 100%;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="container">
+    <section class="hero">
+      <div class="badge">職場で使える簡単チェック</div>
+      <h1>心理的安全性チェック</h1>
+      <p class="subtitle">
+        あなたの職場は、安心して発言しやすい環境ですか？<br>
+        当てはまる項目にチェックを入れて、今の状態を確認してみましょう。
+      </p>
+    </section>
 
-<h2>心理的安全性チェック</h2>
-<p>当てはまるものにチェック👇</p>
+    <section class="card">
+      <h2 class="section-title">8つの質問</h2>
+      <p class="section-desc">当てはまるものにチェックしてください。</p>
 
-<form id="form">
-<label><input type="checkbox"> ミスを共有できる</label><br>
-<label><input type="checkbox"> 上司に意見を言える</label><br>
-<label><input type="checkbox"> 違和感を言える</label><br>
-<label><input type="checkbox"> わからないと言える</label><br>
-<label><input type="checkbox"> 提案が歓迎される</label><br>
-<label><input type="checkbox"> 会議で発言がある</label><br>
-<label><input type="checkbox"> 沈黙が怖くない</label><br>
-<label><input type="checkbox"> 否定より質問が多い</label><br>
+      <form id="checkForm">
+        <div class="question-list">
+          <div class="question-item">
+            <input type="checkbox" id="q1" />
+            <label for="q1">ミスや失敗を共有しても、責められにくい</label>
+          </div>
 
-<button type="button" onclick="calc()">診断する</button>
-</form>
+          <div class="question-item">
+            <input type="checkbox" id="q2" />
+            <label for="q2">上司や先輩に対しても、率直な意見を伝えられる</label>
+          </div>
 
-<h3 id="result"></h3>
+          <div class="question-item">
+            <input type="checkbox" id="q3" />
+            <label for="q3">「それは違うかもしれない」と違和感を口にできる</label>
+          </div>
 
-<script>
-function calc() {
-  let checked = document.querySelectorAll('input:checked').length;
-  let text = "";
+          <div class="question-item">
+            <input type="checkbox" id="q4" />
+            <label for="q4">わからないことを、素直に「わからない」と言える</label>
+          </div>
 
-  if (checked >= 7) text = "心理的安全性が高い状態です！";
-  else if (checked >= 4) text = "中間ゾーン。改善の余地あり。";
-  else text = "要注意。安心して発言しにくい環境かも。";
+          <div class="question-item">
+            <input type="checkbox" id="q5" />
+            <label for="q5">新しい提案やアイデアが歓迎されやすい</label>
+          </div>
 
-  document.getElementById("result").innerText = "スコア：" + checked + "/8\n" + text;
-}
-</script>
-
-</body>
-</html>
+          <div class="question-item">
+            <input type="checkbox" id="q6" />
+            <label for="q6">会議や打ち合わせで、複数の
